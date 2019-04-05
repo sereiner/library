@@ -15,6 +15,7 @@ const requestTimeout = time.Second *2
 var (
 	ErrEtcdNodeIsExists = errors.New("etcd: node is exists")
 	ErrEtcdNodeIsNotExists = errors.New("etcd: node is not exists")
+	ErrClientConnClosing      = errors.New("etcd: the client connection is closing")
 )
 
 // EtcdClient .
@@ -22,7 +23,6 @@ type EtcdClient struct {
 	servers   []string
 	timeout   time.Duration
 	conn      *clientv3.Client
-	eventChan <-chan clientv3.WatchChan
 	useCount  int32
 	isConnect bool
 	once      sync.Once

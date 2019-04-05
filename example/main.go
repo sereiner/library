@@ -1,44 +1,21 @@
 package main
 
 import (
-	"github.com/sereiner/lib/etcd"
+	"fmt"
 	"github.com/sereiner/log"
+	"strconv"
 	"time"
 )
 
 func main() {
-	log.Info("开始连接....")
-	server := []string{"127.0.0.1:2379"}
-	et, err := etcd.NewEtcdClient(server, time.Second*5)
-	defer et.Close()
+	v  := []byte{55,46,49,50,51}
+	log.Info(string(v))
+	log.Info([]byte("."))
+	value, err := strconv.ParseFloat(fmt.Sprintf("%v", v), 32)
 	if err != nil {
 		log.Error(err)
-	}
-	err = et.Connect()
-	if err != nil {
-		log.Error(err)
-	}
-	log.Info("连接成功")
-	log.Info("开始监听")
-	data, err := et.WatchChildren("/logagent")
-	if err != nil {
-		log.Error(err)
+		log.Info(value)
 	}
 
-	dataV, err := et.WatchValue("/logagent/a")
-	if err != nil {
-		log.Error(err)
-	}
-
-	for {
-		select {
-		case d := <-data:
-			val, version := d.GetValue()
-			log.Info(string(val), version, d.GetPath(), d.GetError())
-		case dv := <-dataV:
-			val, version := dv.GetValue()
-			log.Info(string(val), version, dv.GetPath(), dv.GetError())
-		}
-	}
-
+	time.Sleep(time.Second*1)
 }

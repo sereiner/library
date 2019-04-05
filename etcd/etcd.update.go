@@ -3,6 +3,7 @@ package etcd
 import (
 	"context"
 	"errors"
+	"github.com/sereiner/log"
 )
 
 // Update 更新节点的值,如果节点不存在则报错
@@ -17,7 +18,7 @@ func(e *EtcdClient) Update(path string,data string) error {
 	if err != nil {
 		return err
 	}
-
+	log.Info(resp.Count)
 	if resp.Count == 0 {
 		return  ErrEtcdNodeIsNotExists
 	}
