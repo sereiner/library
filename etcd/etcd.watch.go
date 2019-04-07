@@ -13,6 +13,7 @@ type ValueWatcher interface {
 }
 
 type valueEntity struct {
+	Type string
 	Value   []byte
 	version int64
 	path    string

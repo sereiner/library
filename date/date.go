@@ -72,7 +72,6 @@ func Str2Stamp(formatTimeStr string) int64 {
 	return millisecond
 }
 
-
 /*时间戳->字符串*/
 func stamp2Str(stamp int64) string {
 	timeLayout := "2006-01-02 15:04:05"
