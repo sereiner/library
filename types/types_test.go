@@ -15,7 +15,7 @@ func TestGetString(t *testing.T) {
 		// TODO: Add test cases.
 		{name:"1",args:args{v:123},want:"123"},
 		{name:"2",args:args{v:123.22},want:"123.22"},
-		{name:"3",args:args{v:[]byte{65}},want:"A"},
+		{name:"3",args:args{v:[]byte{46,47,48,49}},want:"./01"},
 		{name:"4",args:args{v:"hello"},want:"hello"},
 	}
 	for _, tt := range tests {
@@ -121,6 +121,8 @@ func TestGetFloat32(t *testing.T) {
 		want float32
 	}{
 		// TODO: Add test cases.
+		{name:"1",args:args{v:[]byte{50,46,51}},want:2.3},
+		{name:"2",args:args{v:123.12},want:123.12},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -142,6 +144,8 @@ func TestGetFloat64(t *testing.T) {
 		want float64
 	}{
 		// TODO: Add test cases.
+		{name:"1",args:args{v:[]byte{50,46,51}},want:2.3},
+		{name:"2",args:args{v:123.12},want:123.12},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -184,6 +188,8 @@ func TestGetUint64(t *testing.T) {
 		want uint64
 	}{
 		// TODO: Add test cases.
+		{name:"1",args:args{v:1},want:1},
+		{name:"2",args:args{v:"123"},want:123},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

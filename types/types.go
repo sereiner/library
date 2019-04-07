@@ -27,6 +27,11 @@ func GetString(v interface{}, def ...string) string {
 
 //GetInt 获取int数据
 func GetInt(v interface{}, def ...int) int {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
 	value := fmt.Sprintf("%v", v)
 	if strings.Contains(strings.ToUpper(value), "E+") {
 		var n float64
@@ -61,9 +66,7 @@ func GetInt(v interface{}, def ...int) int {
 func GetInt32(v interface{}, def ...int32) int32 {
 
 	if vb, ok := v.([]byte); ok {
-		if i ,err :=strconv.Atoi(string(vb));err == nil {
-			return int32(i)
-		}
+		v = string(vb)
 	}
 
 	value := fmt.Sprintf("%v", v)
@@ -101,9 +104,7 @@ func GetInt32(v interface{}, def ...int32) int32 {
 func GetInt64(v interface{}, def ...int64) int64 {
 
 	if vb, ok := v.([]byte); ok {
-		if i ,err :=strconv.Atoi(string(vb));err == nil {
-			return int64(i)
-		}
+		v = string(vb)
 	}
 
 	value := fmt.Sprintf("%v", v)
@@ -139,6 +140,11 @@ func GetInt64(v interface{}, def ...int64) int64 {
 
 //GetFloat32 获取float32数据，不是有效的数字则返回默然值或0
 func GetFloat32(v interface{}, def ...float32) float32 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
 	if value, err := strconv.ParseFloat(fmt.Sprintf("%v", v), 32); err == nil {
 		return float32(value)
 	}
@@ -150,6 +156,11 @@ func GetFloat32(v interface{}, def ...float32) float32 {
 
 //GetFloat64 获取float64数据，不是有效的数字则返回默然值或0
 func GetFloat64(v interface{}, def ...float64) float64 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
 	if value, err := strconv.ParseFloat(fmt.Sprintf("%v", v), 64); err == nil {
 		return value
 	}
@@ -160,6 +171,11 @@ func GetFloat64(v interface{}, def ...float64) float64 {
 }
 
 func GetUint32(v interface{}, def ...uint32) uint32 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
 	value := fmt.Sprintf("%v", v)
 	if strings.Contains(strings.ToUpper(value), "E+") {
 		var n float64
@@ -181,6 +197,11 @@ func GetUint32(v interface{}, def ...uint32) uint32 {
 }
 
 func GetUint64(v interface{}, def ...uint64) uint64 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
 	value := fmt.Sprintf("%v", v)
 	if strings.Contains(strings.ToUpper(value), "E+") {
 		var n float64
