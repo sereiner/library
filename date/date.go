@@ -52,11 +52,11 @@ func TimeStampToDate(timeStamp int64) string {
 }
 
 func DateToTimeStamp(date string) int64 {
-	return Str2Time(date).Unix()
+	return str2Time(date).Unix()
 }
 
 /**字符串->时间对象*/
-func Str2Time(formatTimeStr string) time.Time {
+func str2Time(formatTimeStr string) time.Time {
 	timeLayout := "2006-01-02 15:04:05"
 	loc, _ := time.LoadLocation("Local")
 	theTime, _ := time.ParseInLocation(timeLayout, formatTimeStr, loc)
@@ -67,22 +67,22 @@ func Str2Time(formatTimeStr string) time.Time {
 
 /**字符串->时间戳*/
 func Str2Stamp(formatTimeStr string) int64 {
-	timeStruct := Str2Time(formatTimeStr)
+	timeStruct := str2Time(formatTimeStr)
 	millisecond := timeStruct.UnixNano() / 1e6
 	return millisecond
 }
 
 
 /*时间戳->字符串*/
-func Stamp2Str(stamp int64) string {
+func stamp2Str(stamp int64) string {
 	timeLayout := "2006-01-02 15:04:05"
 	str := time.Unix(stamp/1000, 0).Format(timeLayout)
 	return str
 }
 
 /*时间戳->时间对象*/
-func Stamp2Time(stamp int64) time.Time {
-	stampStr := Stamp2Str(stamp)
-	timer := Str2Time(stampStr)
+func stamp2Time(stamp int64) time.Time {
+	stampStr := stamp2Str(stamp)
+	timer := str2Time(stampStr)
 	return timer
 }
