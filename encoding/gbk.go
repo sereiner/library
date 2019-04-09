@@ -11,6 +11,11 @@ import (
 	"golang.org/x/text/transform"
 )
 
+const (
+	GBK    = "gbk"
+	GB2312 = "gb2312"
+)
+
 //Encode 将UTF8字符串编码为gbk或gb2312格式
 func Encode(content string, e string) (result []byte) {
 	return EncodeBytes([]byte(content), e)
