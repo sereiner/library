@@ -43,8 +43,8 @@ func GetInt(v interface{}, def ...int) int {
 			return def[0]
 		}
 	}
-	if strings.Contains(value,".") {
-		i := strings.Index(value,".")
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
 		if value, err := strconv.Atoi(value[:i]); err == nil {
 			return value
 		}
@@ -81,9 +81,9 @@ func GetInt32(v interface{}, def ...int32) int32 {
 		}
 	}
 
-	if strings.Contains(value,".") {
-		i := strings.Index(value,".")
-		if value, err := strconv.ParseInt(value[:i],10,32); err == nil {
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseInt(value[:i], 10, 32); err == nil {
 			return int32(value)
 		}
 		if len(def) > 0 {
@@ -119,9 +119,9 @@ func GetInt64(v interface{}, def ...int64) int64 {
 		}
 	}
 
-	if strings.Contains(value,".") {
-		i := strings.Index(value,".")
-		if value, err := strconv.ParseInt(value[:i],10,64); err == nil {
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseInt(value[:i], 10, 64); err == nil {
 			return value
 		}
 		if len(def) > 0 {
@@ -187,6 +187,17 @@ func GetUint32(v interface{}, def ...uint32) uint32 {
 			return def[0]
 		}
 	}
+
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseUint(value[:i], 10, 32); err == nil {
+			return uint32(value)
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
 	if value, err := strconv.ParseUint(value, 10, 32); err == nil {
 		return uint32(value)
 	}
@@ -213,6 +224,17 @@ func GetUint64(v interface{}, def ...uint64) uint64 {
 			return def[0]
 		}
 	}
+
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseUint(value[:i], 10, 64); err == nil {
+			return value
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
 	if value, err := strconv.ParseUint(value, 10, 64); err == nil {
 		return value
 	}
