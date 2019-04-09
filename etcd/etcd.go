@@ -10,12 +10,12 @@ import (
 	"go.etcd.io/etcd/clientv3"
 )
 
-const requestTimeout = time.Second *2
+const requestTimeout = time.Second * 2
 
 var (
-	ErrEtcdNodeIsExists = errors.New("etcd: node is exists")
+	ErrEtcdNodeIsExists    = errors.New("etcd: node is exists")
 	ErrEtcdNodeIsNotExists = errors.New("etcd: node is not exists")
-	ErrClientConnClosing      = errors.New("etcd: the client connection is closing")
+	ErrClientConnClosing   = errors.New("etcd: the client connection is closing")
 )
 
 // EtcdClient .

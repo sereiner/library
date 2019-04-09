@@ -1,9 +1,10 @@
 package etcd
 
 import (
-	"github.com/sereiner/log"
 	"testing"
 	"time"
+
+	"github.com/sereiner/log"
 )
 
 func TestNewEtcdClient(t *testing.T) {
@@ -24,27 +25,29 @@ func TestNewEtcdClient(t *testing.T) {
 		t.Log(err)
 	}
 
-	ch, _ := et.Register("/server/db", "mysql")
+	ch, revision, _ := et.Register("/server/db", "mysql")
 
 	data, _ := et.WatchValue("/server/db")
 
 	go func() {
-		time.Sleep(time.Second *15)
+		time.Sleep(time.Second * 30)
 		log.Info("删除服务")
-		et.RevokeByPath("/server/db")
+		err := et.RevokeByPath("/server/db")
+		if err != nil {
+			log.Error(err)
+		}
 	}()
 
 	for {
 		select {
 		case ka, ok := <-ch:
-			if !ok {
+			if !ok || revision != ka.GetRevision() {
 				return
-			} else {
-				log.Info(ka.ID)
 			}
+			log.Infof("%+v", ka.String())
 		case d := <-data:
-			dv , _ := d.GetValue()
-			log.Debug(d.GetPath(),"  ",dv)
+			dv, _ := d.GetValue()
+			log.Debug(d.GetPath(), "  ", string(dv))
 		}
 	}
 

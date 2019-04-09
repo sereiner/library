@@ -3,29 +3,29 @@ package etcd
 import (
 	"context"
 	"errors"
+
 	"go.etcd.io/etcd/clientv3"
 )
 
 // Register 注册一个服务
-func (e *EtcdClient) Register(path ,data string) (ch <-chan *clientv3.LeaseKeepAliveResponse,err error) {
+func (e *EtcdClient) Register(path, data string) (ch <-chan *clientv3.LeaseKeepAliveResponse, revision int64, err error) {
 	if !e.isConnect {
-		return nil, errors.New("etcd 连接已经关闭")
+		return nil, -1, errors.New("etcd 连接已经关闭")
 	}
 
 	resp, err := e.conn.Grant(context.TODO(), 10)
 	if err != nil {
-		return nil, err
+		return nil, -1, err
 	}
 
-	_, err = e.conn.Put(context.TODO(), path, data, clientv3.WithLease(resp.ID))
+	pt, err := e.conn.Put(context.TODO(), path, data, clientv3.WithLease(resp.ID))
 	if err != nil {
-		return nil,err
+		return nil, -1, err
 	}
-
-
+	revision = pt.Header.GetRevision()
 	ch, err = e.conn.KeepAlive(context.TODO(), resp.ID)
 	if err != nil {
-		return nil,err
+		return nil, -1, err
 	}
 
 	return
@@ -50,23 +50,23 @@ func (e *EtcdClient) RevokeByPath(path string) error {
 		return errors.New("etcd 连接已经关闭")
 	}
 
-	ctx,cancel:= context.WithTimeout(context.Background(),requestTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
 
-	resp,err := e.conn.Get(ctx,path)
+	resp, err := e.conn.Get(ctx, path)
 	cancel()
 	if err != nil {
 		return err
 	}
 
 	if resp.Count == 0 {
-		return  ErrEtcdNodeIsNotExists
+		return ErrEtcdNodeIsNotExists
 	}
 
 	id := resp.Kvs[0].Lease
 
 	_, err = e.conn.Revoke(context.TODO(), clientv3.LeaseID(id))
 	if err != nil {
-		return err
+		return e.Delete(path)
 	}
 
 	return nil

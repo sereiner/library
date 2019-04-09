@@ -3,6 +3,7 @@ package etcd
 import (
 	"context"
 	"errors"
+
 	"go.etcd.io/etcd/clientv3"
 )
 
@@ -13,7 +14,7 @@ type ValueWatcher interface {
 }
 
 type valueEntity struct {
-	Type string
+	Type    string
 	Value   []byte
 	version int64
 	path    string
@@ -66,7 +67,6 @@ func (e *EtcdClient) WatchValue(path string) (data chan ValueWatcher, err error)
 	return
 }
 
-
 type ChildrenWatcher interface {
 	GetValue() ([]byte, int64)
 	GetPath() string
@@ -80,7 +80,6 @@ type valuesEntity struct {
 	Err     error
 }
 
-
 func (v *valuesEntity) GetValue() ([]byte, int64) {
 	return v.Value, v.version
 }
@@ -90,14 +89,15 @@ func (v *valuesEntity) GetError() error {
 func (v *valuesEntity) GetPath() string {
 	return v.path
 }
+
 // WatchChildren 监控子节点变化
-func (e *EtcdClient) WatchChildren(path string) (data chan ChildrenWatcher,err error) {
+func (e *EtcdClient) WatchChildren(path string) (data chan ChildrenWatcher, err error) {
 	if !e.isConnect {
 		return nil, errors.New("etcd 连接已经关闭")
 	}
 
 	data = make(chan ChildrenWatcher, 1)
-	rch := e.conn.Watch(context.Background(), path,clientv3.WithPrefix())
+	rch := e.conn.Watch(context.Background(), path, clientv3.WithPrefix())
 
 	go func(data chan ChildrenWatcher) {
 		for {
