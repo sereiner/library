@@ -168,6 +168,7 @@ func TestGetUint32(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{name: "1", args: args{v: "123.33"}, want: 123},
+		{name: "7", args: args{v: []byte{51, 46, 50, 51}}, want: 3},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -191,6 +192,7 @@ func TestGetUint64(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "1", args: args{v: 1}, want: 1},
 		{name: "2", args: args{v: "123.12"}, want: 123},
+		{name: "7", args: args{v: []byte{49, 46, 50, 51}}, want: 1},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

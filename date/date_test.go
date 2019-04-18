@@ -170,12 +170,33 @@ func TestDateToTimeStamp(t *testing.T) {
 		want int64
 	}{
 		// TODO: Add test cases.
-		{name: "1", args: args{date: "2019-04-06 23:59:59"}, want: 1554566399},
+		{name: "1", args: args{date: "2019-04-10T14:28:54+08:00"}, want: 1554566399},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := DateToTimeStamp(tt.args.date); got != tt.want {
 				t.Errorf("DateToTimeStamp() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStr2Stamp(t *testing.T) {
+	type args struct {
+		formatTimeStr string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int64
+	}{
+		// TODO: Add test cases.
+		{name: "1", args: args{formatTimeStr: "2019-04-10T14:28:54+08:00"}, want: 0},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Str2Stamp(tt.args.formatTimeStr); got != tt.want {
+				t.Errorf("Str2Stamp() = %v, want %v", got, tt.want)
 			}
 		})
 	}
