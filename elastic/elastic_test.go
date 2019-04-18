@@ -66,7 +66,7 @@ func TestElasticSearch_List(t *testing.T) {
 
 func TestElasticSearch_Update(t *testing.T) {
 	conf := ESConfigOption{
-		Host:  []string{"http://localhost:9200/"},
+		Host:  []string{"http://calorie-qa.manyoujing.net:9200/"},
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
@@ -76,19 +76,17 @@ func TestElasticSearch_Update(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	id, Type, err := es.Update("2", map[string]interface{}{
+	err = es.Update("2", map[string]interface{}{
 		"tag_name": "送你一匹马",
 	})
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(id, Type)
-
 }
 
 func TestElasticSearch_Create(t *testing.T) {
 	conf := ESConfigOption{
-		Host:  []string{"http://localhost:9200/"},
+		Host:  []string{"http://calorie-qa.manyoujing.net:9200/"},
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,

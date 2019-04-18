@@ -8,7 +8,7 @@ import (
 	"reflect"
 )
 
-//ElasticSearch es组件
+// ElasticSearch es组件
 type ElasticSearch struct {
 	host  []string
 	conn  *elastic.Client
@@ -25,7 +25,7 @@ type ESConfigOption struct {
 	log   elastic.Logger
 }
 
-// New .
+// New 创建elastic 实例
 func New(conf ESConfigOption) (es *ElasticSearch, err error) {
 	es = &ElasticSearch{}
 	es.host = conf.Host
@@ -42,7 +42,7 @@ func New(conf ESConfigOption) (es *ElasticSearch, err error) {
 	return
 }
 
-// Create 创建一条记录
+// Create 创建一条记录,没有索引会同时创建索引
 func (es *ElasticSearch) Create(id string,data map[string]interface{}) (err error) {
 
 	_, err = es.conn.Index().
@@ -57,7 +57,7 @@ func (es *ElasticSearch) Create(id string,data map[string]interface{}) (err erro
 	return
 }
 
-// Delete 删除一条记录
+// Delete 根据id删除一条记录
 func (es *ElasticSearch) Delete(id string) (err error) {
 
 	_, err = es.conn.Delete().
@@ -72,10 +72,10 @@ func (es *ElasticSearch) Delete(id string) (err error) {
 	return
 }
 
-//Update 修改一条记录
-func (es *ElasticSearch) Update(id string, doc map[string]interface{}) (ID, Type string, err error) {
+// Update 修改一条记录,字段可以不完整
+func (es *ElasticSearch) Update(id string, doc map[string]interface{}) (err error) {
 
-	res, err := es.conn.Update().
+	_, err = es.conn.Update().
 		Index(es.Index).
 		Type(es.Type).
 		Id(id).
@@ -85,10 +85,10 @@ func (es *ElasticSearch) Update(id string, doc map[string]interface{}) (ID, Type
 		return
 	}
 
-	return res.Id, res.Type, nil
+	return
 }
 
-// Gets 通过id查找
+// Gets 通过id查找记录,没有记录返回错误
 func (es *ElasticSearch) Gets(id string) (res []byte, err error) {
 
 	get, err := es.conn.Get().
@@ -107,7 +107,11 @@ func (es *ElasticSearch) Gets(id string) (res []byte, err error) {
 	return nil, errors.New("not found")
 }
 
-//List 分页获取内容
+// List 分页获取内容
+// tag 字段名称
+// query 要查的内容
+// size 每页显示的条数
+// page 页码
 func (es *ElasticSearch) List(tag, query string, size, page int) (data []interface{},total int64, err error) {
 
 	if size < 0 || page < 1 {
@@ -130,7 +134,7 @@ func (es *ElasticSearch) List(tag, query string, size, page int) (data []interfa
 	return res.Each(reflect.TypeOf(typ)), res.TotalHits(), nil
 }
 
-// Bulk 批量导入,修改记录
+// Bulk 批量导入,修改记录.字段必须完整,否则记录可能丢失字段
 func (es *ElasticSearch) Bulk(array []map[string]interface{}) (res []*elastic.BulkResponseItem, err error) {
 
 	bulkRequest := es.conn.Bulk()
