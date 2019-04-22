@@ -22,7 +22,7 @@ type ESConfigOption struct {
 	Index string
 	Type  string
 	Sniff bool
-	log   elastic.Logger
+	Log   elastic.Logger
 }
 
 // New 创建elastic 实例
