@@ -31,7 +31,7 @@ func New(conf ESConfigOption) (es *ElasticSearch, err error) {
 	es.host = conf.Host
 	es.Index = conf.Index
 	es.Type = conf.Type
-	es.conn, err = elastic.NewClient(elastic.SetErrorLog(conf.log), elastic.SetURL(es.host...), elastic.SetSniff(conf.Sniff))
+	es.conn, err = elastic.NewClient(elastic.SetErrorLog(conf.Log), elastic.SetURL(es.host...), elastic.SetSniff(conf.Sniff))
 	if err != nil {
 		return nil, err
 	}
