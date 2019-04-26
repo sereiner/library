@@ -19,6 +19,17 @@ func Hash(str string) uint64 {
 	return (hash & 0x7FFFFFFFFFFFFFFF)
 }
 
+
+func Hash32(key string) uint32 {
+	hash := uint32(2166136261)
+	const prime32 = uint32(16777619)
+	for i := 0; i < len(key); i++ {
+		hash *= prime32
+		hash ^= uint32(key[i])
+	}
+	return hash
+}
+
 // GUID 获取GUID
 func GUID() string {
 	b := make([]byte, 48)
