@@ -18,3 +18,12 @@ func CreateFile(path string) (f *os.File, err error) {
 	}
 	return os.OpenFile(absPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 }
+
+//GetAbs 获取文件绝对路径
+func GetAbs(path string) (string, error) {
+	absPath, err := filepath.Abs(path)
+	if err != nil {
+		return "", err
+	}
+	return absPath, nil
+}
