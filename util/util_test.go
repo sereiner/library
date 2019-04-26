@@ -5,24 +5,7 @@ import (
 )
 
 func TestHash(t *testing.T) {
-	type args struct {
-		str string
-	}
-	tests := []struct {
-		name string
-		args args
-		want uint64
-	}{
-		// TODO: Add test cases.
-		{name: "1", args: args{str: "hello"}, want: 3092122322284475622},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := Hash(tt.args.str); got != tt.want {
-				t.Errorf("Hash() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+	t.Log(Hash("hello12") % 4)
 }
 
 func TestGUID(t *testing.T) {
