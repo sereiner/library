@@ -2,8 +2,6 @@ package elastic
 
 import (
 	"testing"
-
-	"github.com/sereiner/log"
 )
 
 func TestNew(t *testing.T) {
@@ -12,7 +10,6 @@ func TestNew(t *testing.T) {
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
@@ -31,7 +28,6 @@ func TestElasticSearch_Gets(t *testing.T) {
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
@@ -50,7 +46,6 @@ func TestElasticSearch_List(t *testing.T) {
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
@@ -70,7 +65,6 @@ func TestElasticSearch_Update(t *testing.T) {
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
@@ -90,7 +84,6 @@ func TestElasticSearch_Create(t *testing.T) {
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
@@ -109,17 +102,16 @@ func TestElasticSearch_Create(t *testing.T) {
 
 func TestElasticSearch_Delete(t *testing.T) {
 	conf := ESConfigOption{
-		Host:  []string{"http://localhost:9200/"},
-		Index: "tag_test",
+		Host:  []string{"http://39.98.58.40:9200/"},
+		Index: "tag",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
 		t.Error(err)
 	}
-	err = es.Delete("4")
+	err = es.Delete("2091727")
 	if err != nil {
 		t.Error(err)
 	}
@@ -131,7 +123,6 @@ func TestElasticSearch_Bulk(t *testing.T) {
 		Index: "tag_test",
 		Type:  "book",
 		Sniff: false,
-		log:   log.New("es"),
 	}
 	es, err := New(conf)
 	if err != nil {
@@ -140,23 +131,45 @@ func TestElasticSearch_Bulk(t *testing.T) {
 	}
 	arr := []map[string]interface{}{}
 
-	arr =append(arr,map[string]interface{}{
+	arr = append(arr, map[string]interface{}{
 		"id":       1,
 		"spu_id":   "11223345",
 		"tag_id":   1234,
 		"tag_name": "雨季不再来4",
-	},map[string]interface{}{
+	}, map[string]interface{}{
 		"id":       2,
 		"spu_id":   "11223345",
 		"tag_id":   1234,
 		"tag_name": "雨季不再来4",
 	})
 
-	res,err := es.Bulk(arr)
+	res, err := es.Bulk(arr)
 	if err != nil {
 		t.Error(err)
 	}
-	for _,v := range res {
-		t.Logf("%+v",v)
+	for _, v := range res {
+		t.Logf("%+v", v)
 	}
+}
+
+func TestElasticSearch_Group(t *testing.T) {
+
+	conf := ESConfigOption{
+		Host:  []string{"http://39.98.58.40:9200/"},
+		Index: "tag",
+		Type:  "book",
+		Sniff: false,
+	}
+	es, err := New(conf)
+	if err != nil {
+		t.Error(err)
+	}
+	res, total, err := es.Group("tag_name", "漫画", "tag_id", 20, 1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	t.Logf("%+v", res)
+	t.Log(total)
+
 }

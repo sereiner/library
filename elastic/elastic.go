@@ -2,10 +2,15 @@ package elastic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/olivere/elastic"
 	"github.com/sereiner/lib/types"
+	"io/ioutil"
+	"net/http"
 	"reflect"
+	"strings"
 )
 
 // ElasticSearch es组件
@@ -43,7 +48,7 @@ func New(conf ESConfigOption) (es *ElasticSearch, err error) {
 }
 
 // Create 创建一条记录,没有索引会同时创建索引
-func (es *ElasticSearch) Create(id string,data map[string]interface{}) (err error) {
+func (es *ElasticSearch) Create(id string, data map[string]interface{}) (err error) {
 
 	_, err = es.conn.Index().
 		Index(es.Index).
@@ -107,15 +112,52 @@ func (es *ElasticSearch) Gets(id string) (res []byte, err error) {
 	return nil, errors.New("not found")
 }
 
+// Group 分组查询
+// group 要分组的字段
+func (es *ElasticSearch) Group(tag, query string, group string, pageSize, page int) (response *Response, total int64, err error) {
+
+	request := NewRequestModel((page-1)*pageSize, pageSize)
+
+	request.AddCondition([]string{tag}, query)
+	request.AddCollapse(group)
+	str, err := request.TransfromJSON()
+	if err != nil {
+		return
+	}
+
+	resp, err := http.Post(fmt.Sprintf("%s%s/%s/_search", es.host[0], es.Index, es.Type), "application/json", strings.NewReader(str))
+	fmt.Println(resp.Request.URL.Path)
+	defer resp.Body.Close()
+	if err != nil {
+		return
+	}
+	if resp.StatusCode != 200 {
+		err = errors.New("请求失败")
+		return
+	}
+
+	responseData, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		err = errors.New("读取返回结果失败")
+		return
+	}
+
+	response = &Response{}
+	err = json.Unmarshal(responseData, response)
+	total = response.Took
+	return
+
+}
+
 // List 分页获取内容
 // tag 字段名称
 // query 要查的内容
 // size 每页显示的条数
 // page 页码
-func (es *ElasticSearch) List(tag, query string, size, page int) (data []interface{},total int64, err error) {
+func (es *ElasticSearch) List(tag, query string, size, page int) (data []interface{}, total int64, err error) {
 
 	if size < 0 || page < 1 {
-		return nil,0, errors.New("param error")
+		return nil, 0, errors.New("param error")
 	}
 
 	q := elastic.NewMatchPhraseQuery(tag, query)
@@ -127,7 +169,7 @@ func (es *ElasticSearch) List(tag, query string, size, page int) (data []interfa
 		From((page - 1) * size).
 		Do(context.Background())
 	if err != nil {
-		return nil,0, err
+		return nil, 0, err
 	}
 
 	typ := map[string]interface{}{}
