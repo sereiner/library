@@ -3,7 +3,7 @@ package db
 import (
 	"time"
 
-	"github.com/micro-plat/lib4go/types"
+	"github.com/sereiner/lib/types"
 )
 
 type IQueryRow interface {
