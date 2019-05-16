@@ -2,7 +2,7 @@ package tpl
 
 import "testing"
 
-//go test -coverprofile=cover.out github.com/zzkkff/lib4go/db/tpl
+//go test -coverprofile=cover.out github.com/zzkkff/lib/db/tpl
 // cover -func=cover.out
 
 func TestAnalyzeTPL(t *testing.T) {

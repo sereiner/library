@@ -1,24 +1,33 @@
 package net
 
-import "testing"
+import (
+	"testing"
+)
 
-func TestGetLocalIP(t *testing.T) {
-	type args struct {
-		masks []string
+func TestIsTCPPortAvailable(t *testing.T) {
+	if IsTCPPortAvailable(443) {
+		t.Error("IsTCPPortAvailable is fail")
 	}
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		// TODO: Add test cases.
-		{name:"1",args:args{masks:nil},want:"127.0.0.1"},
+
+	if !IsTCPPortAvailable(6666) {
+		t.Error("IsTCPPortAvailable is fail")
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := GetLocalIP(tt.args.masks...); got != tt.want {
-				t.Errorf("GetLocalIP() = %v, want %v", got, tt.want)
-			}
-		})
+}
+
+func TestRandomTCPPort(t *testing.T) {
+	if RandomTCPPort() == -1 {
+		t.Error("RandomTCPPort is fail")
+	}
+}
+
+func TestGetAvailablePort(t *testing.T) {
+	ports := []int{443, 6666}
+	if GetAvailablePort(ports) == -1 || GetAvailablePort(ports) != 6666 {
+		t.Error("GetAvailablePort is fail")
+	}
+
+	ports = []int{443, 22}
+	if GetAvailablePort(ports) != -1 {
+		t.Error("GetAvailablePort is fail")
 	}
 }

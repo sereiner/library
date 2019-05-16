@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/micro-plat/lib4go/concurrent/cmap"
+	"github.com/sereiner/lib/concurrent/cmap"
 )
 
 const (
