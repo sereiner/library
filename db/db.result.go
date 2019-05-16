@@ -3,7 +3,7 @@ package db
 import (
 	"time"
 
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 )
 
 type IQueryRow interface {

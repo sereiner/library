@@ -3,7 +3,7 @@ package xsync
 import (
 	"sync"
 
-	"github.com/sereiner/lib/utility"
+	"github.com/sereiner/library/utility"
 )
 
 //Sequence 序列

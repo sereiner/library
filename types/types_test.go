@@ -1,7 +1,7 @@
 package types
 
 import "testing"
-import "github.com/sereiner/lib/ut"
+import "github.com/sereiner/library/ut"
 
 func BenchmarkTest(b *testing.B) {
 	ut.Expect(b, DecodeString("3", "2", "3", "3", "2", "4"), "2")

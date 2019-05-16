@@ -17,8 +17,8 @@ import (
 
 	"time"
 
-	"github.com/sereiner/lib/encoding"
-	"github.com/sereiner/lib/envs"
+	"github.com/sereiner/library/encoding"
+	"github.com/sereiner/library/envs"
 )
 
 type OptionConf struct {

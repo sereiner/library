@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 )
 
 //GetString 从环境变量中, 获取字符串

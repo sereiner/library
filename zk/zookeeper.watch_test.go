@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sereiner/lib/utility"
+	"github.com/sereiner/library/utility"
 )
 
 // TestWatchChildren 获取节点值检查是否符合预期

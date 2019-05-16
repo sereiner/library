@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/sereiner/lib/cache"
+	"github.com/sereiner/library/cache"
 )
 
 // memcacheClient memcache配置文件

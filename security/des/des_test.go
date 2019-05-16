@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 func TestEncrypt(t *testing.T) {

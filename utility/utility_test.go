@@ -3,7 +3,7 @@ package utility
 import (
 	"testing"
 
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 // TestGetGUID 测试生成的Guid是否重复

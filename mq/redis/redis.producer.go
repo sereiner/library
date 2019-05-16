@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/sereiner/lib/logger"
-	"github.com/sereiner/lib/mq"
-	"github.com/sereiner/lib/redis"
+	logger "github.com/sereiner/log"
+	"github.com/sereiner/library/mq"
+	"github.com/sereiner/library/redis"
 )
 
 //RedisProducer Producer

@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/sereiner/lib/transform"
+	"github.com/sereiner/library/transform"
 )
 
 // ConfigOptions influxdb配置

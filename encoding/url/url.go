@@ -3,7 +3,7 @@ package url
 import (
 	"net/url"
 
-	"github.com/sereiner/lib/encoding"
+	"github.com/sereiner/library/encoding"
 )
 
 // Encode 对字符串进行url编码

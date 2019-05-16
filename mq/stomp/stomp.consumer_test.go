@@ -3,7 +3,7 @@ package stomp
 import (
 	"testing"
 
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 var consumerQueue = "queue_test"

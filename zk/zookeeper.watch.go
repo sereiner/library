@@ -58,7 +58,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/sereiner/lib/registry"
+	"github.com/sereiner/library/registry"
 	"github.com/samuel/go-zookeeper/zk"
 )
 

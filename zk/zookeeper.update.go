@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sereiner/lib/encoding"
+	"github.com/sereiner/library/encoding"
 )
 
 // Update 更新一个节点的值，如果存在则更新，如果不存在则报错

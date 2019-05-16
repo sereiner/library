@@ -5,7 +5,7 @@ import (
 	"encoding/base64"
 	"io"
 
-	"github.com/sereiner/lib/security/md5"
+	"github.com/sereiner/library/security/md5"
 )
 
 // GetGUID 生成Guid字串

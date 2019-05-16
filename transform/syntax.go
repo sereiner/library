@@ -3,7 +3,7 @@ package transform
 import (
 	"strings"
 
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 )
 
 const (

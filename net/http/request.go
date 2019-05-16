@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/sereiner/lib/encoding"
+	"github.com/sereiner/library/encoding"
 )
 
 // NewRequest 创建新请求

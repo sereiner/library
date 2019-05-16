@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/Shopify/sarama"
-	"github.com/sereiner/lib/concurrent/cmap"
-	"github.com/sereiner/lib/mq"
+	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/library/mq"
 )
 
 //KafkaConsumer kafka consumer

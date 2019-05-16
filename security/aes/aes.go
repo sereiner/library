@@ -5,7 +5,7 @@ import (
 	"crypto/cipher"
 	"strings"
 
-	"github.com/sereiner/lib/encoding/base64"
+	"github.com/sereiner/library/encoding/base64"
 )
 
 func getKey(key string) []byte {

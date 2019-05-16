@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	xdes "github.com/sereiner/lib/security/des"
+	xdes "github.com/sereiner/library/security/des"
 )
 
 //Encrypt 3des加密cbs/pkcs5

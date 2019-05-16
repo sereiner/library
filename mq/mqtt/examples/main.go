@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sereiner/lib/mq"
-	"github.com/sereiner/lib/mq/mqtt"
-	pmqtt "github.com/sereiner/lib/queue/mqtt"
+	"github.com/sereiner/library/mq"
+	"github.com/sereiner/library/mq/mqtt"
+	pmqtt "github.com/sereiner/library/queue/mqtt"
 )
 
 func main() {

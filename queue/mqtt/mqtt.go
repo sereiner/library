@@ -9,11 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sereiner/lib/logger"
-	"github.com/sereiner/lib/net"
-	"github.com/sereiner/lib/utility"
+	logger "github.com/sereiner/log"
+	"github.com/sereiner/library/net"
+	"github.com/sereiner/library/utility"
 
-	"github.com/sereiner/lib/queue"
+	"github.com/sereiner/library/queue"
 	"github.com/yosssi/gmq/mqtt"
 	"github.com/yosssi/gmq/mqtt/client"
 )

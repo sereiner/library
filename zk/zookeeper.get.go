@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sereiner/lib/encoding"
+	"github.com/sereiner/library/encoding"
 )
 
 type getValueType struct {

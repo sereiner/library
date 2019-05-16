@@ -6,8 +6,8 @@ import (
 	"log"
 	uurl "net/url"
 	"time"
-	//"github.com/sereiner/lib/influxdb"
-	//"github.com/sereiner/lib/influxdb"
+	//"github.com/sereiner/library/influxdb"
+	//"github.com/sereiner/library/influxdb"
 )
 
 type IInfluxClient interface {

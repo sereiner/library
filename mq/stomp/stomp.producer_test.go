@@ -1,7 +1,7 @@
 package stomp
 
 import "testing"
-import "github.com/sereiner/lib/ut"
+import "github.com/sereiner/library/ut"
 import "time"
 
 var address = "192.168.0.165:61613"

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/sereiner/lib/utility"
+	"github.com/sereiner/library/utility"
 )
 
 func TestSaveBase64Img(t *testing.T) {

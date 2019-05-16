@@ -19,9 +19,9 @@ import (
 
 	"time"
 
-	"github.com/sereiner/lib/encoding/base64"
-	"github.com/sereiner/lib/net/http"
-	"github.com/sereiner/lib/security/md5"
+	"github.com/sereiner/library/encoding/base64"
+	"github.com/sereiner/library/net/http"
+	"github.com/sereiner/library/security/md5"
 )
 
 type eSMS struct {

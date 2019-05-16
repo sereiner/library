@@ -1,6 +1,6 @@
 package db
 
-import "github.com/sereiner/lib/db/tpl"
+import "github.com/sereiner/library/db/tpl"
 
 //DBTrans 数据库事务操作类
 type DBTrans struct {

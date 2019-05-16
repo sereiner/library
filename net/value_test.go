@@ -1,7 +1,7 @@
 package net
 
 import "testing"
-import "github.com/sereiner/lib/ut"
+import "github.com/sereiner/library/ut"
 
 func TestSign(t *testing.T) {
 	values := NewValues()

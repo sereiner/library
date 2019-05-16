@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/lib/cache"
-	"github.com/sereiner/lib/redis"
+	"github.com/sereiner/library/cache"
+	"github.com/sereiner/library/redis"
 )
 
 // redisClient redis配置文件

@@ -5,8 +5,8 @@ import (
 	"crypto/cipher"
 	"fmt"
 
-	"github.com/sereiner/lib/encoding/base64"
-	"github.com/sereiner/lib/security/des"
+	"github.com/sereiner/library/encoding/base64"
+	"github.com/sereiner/library/security/des"
 )
 
 // EncryptCBCPKCS7WithIV CBC模式,PKCS7填充

@@ -6,7 +6,7 @@ import (
 
 	"sync"
 
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 )
 
 //DirWatcher 文件夹监控

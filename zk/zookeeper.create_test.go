@@ -8,7 +8,7 @@ import (
 
 	"strings"
 
-	"github.com/sereiner/lib/utility"
+	"github.com/sereiner/library/utility"
 )
 
 /*

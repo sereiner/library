@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/lib/encoding"
+	"github.com/sereiner/library/encoding"
 	"github.com/samuel/go-zookeeper/zk"
 )
 

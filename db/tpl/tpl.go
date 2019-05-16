@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 )
 
 const (

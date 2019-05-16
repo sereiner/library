@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/sereiner/lib/db"
+	"github.com/sereiner/library/db"
 )
 
 func TestT1(t *testing.T) {

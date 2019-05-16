@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sereiner/lib/archiver"
+	"github.com/sereiner/library/archiver"
 )
 
 func main() {

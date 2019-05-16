@@ -5,7 +5,7 @@ import (
 	"testing"
 	"testing/quick"
 
-	"github.com/sereiner/lib/influxdb/models"
+	"github.com/sereiner/library/influxdb/models"
 )
 
 func TestInlineFNV64aEquivalenceFuzz(t *testing.T) {

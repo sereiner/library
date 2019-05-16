@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/lib/influxdb/models"
+	"github.com/sereiner/library/influxdb/models"
 )
 
 const (

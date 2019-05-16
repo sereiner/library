@@ -1,7 +1,7 @@
 package transform
 
 import "testing"
-import "github.com/sereiner/lib/ut"
+import "github.com/sereiner/library/ut"
 
 type TestType struct {
 	name string

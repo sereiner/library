@@ -9,9 +9,9 @@ import (
 
 	"strings"
 
-	"github.com/sereiner/lib/encoding"
-	"github.com/sereiner/lib/jsons"
-	"github.com/sereiner/lib/security/md5"
+	"github.com/sereiner/library/encoding"
+	"github.com/sereiner/library/jsons"
+	"github.com/sereiner/library/security/md5"
 )
 
 var xmqSEQId int64 = 10000

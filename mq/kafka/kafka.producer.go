@@ -10,9 +10,9 @@ import (
 	"fmt"
 
 	"github.com/Shopify/sarama"
-	"github.com/sereiner/lib/concurrent/cmap"
-	"github.com/sereiner/lib/logger"
-	"github.com/sereiner/lib/mq"
+	"github.com/sereiner/library/concurrent/cmap"
+	logger "github.com/sereiner/log"
+	"github.com/sereiner/library/mq"
 )
 
 //KafkaProducer Producer

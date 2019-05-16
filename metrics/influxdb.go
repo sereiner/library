@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/lib/influxdb"
-	"github.com/sereiner/lib/logger"
+	"github.com/sereiner/library/influxdb"
+	logger "github.com/sereiner/log"
 	"github.com/zkfy/cron"
 	"github.com/zkfy/go-metrics"
 )

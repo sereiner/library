@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sereiner/lib/concurrent/cmap"
-	"github.com/sereiner/lib/encoding"
-	"github.com/sereiner/lib/logger"
-	"github.com/sereiner/lib/mq"
+	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/library/encoding"
+	logger "github.com/sereiner/log"
+	"github.com/sereiner/library/mq"
 )
 
 //XMQProducer Producer

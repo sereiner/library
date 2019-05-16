@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/sereiner/lib/concurrent/cmap"
-	"github.com/sereiner/lib/jsons"
-	"github.com/sereiner/lib/transform"
+	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/library/jsons"
+	"github.com/sereiner/library/transform"
 )
 
 //JSONConf json配置文件

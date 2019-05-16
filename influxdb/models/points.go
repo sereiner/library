@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/lib/influxdb/escape"
+	"github.com/sereiner/library/influxdb/escape"
 )
 
 var (
