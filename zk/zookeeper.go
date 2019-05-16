@@ -8,8 +8,8 @@ import (
 
 	"sync"
 
-	"github.com/sereiner/lib/logger"
 	"github.com/samuel/go-zookeeper/zk"
+	logger "github.com/sereiner/log"
 )
 
 // TIMEOUT 连接zk服务器操作的超时时间

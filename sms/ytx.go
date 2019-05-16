@@ -110,7 +110,11 @@ func SendSMS(mobile, data, setting string) (st int, r string, err error) {
 	if err != nil {
 		return
 	}
-	client := http.NewHTTPClient()
+	client, err := http.NewHTTPClient()
+	if err != nil {
+		err = fmt.Errorf("create NewHTTPClient error:%v", err)
+		return
+	}
 	r, st, err = client.Request("post", m.url, m.body, m.charset, m.header)
 	if err != nil {
 		err = fmt.Errorf("%v(url:%s,body:%s,header:%s)", err, m.url, m.body, m.header)
