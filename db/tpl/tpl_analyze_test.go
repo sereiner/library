@@ -38,7 +38,7 @@ func TestAnalyzeTPL(t *testing.T) {
 		`18where name=@name3_`:   []interface{}{`18where name=:`, 1},
 		`19where name=@t.name3_`: []interface{}{`19where name=:`, 1},
 		`20where name=$name3_`:   []interface{}{`20where name=name3_`, 0},
-		`21where ?name`:          []interface{}{`21where name like '%'||:||'%'`, 1},
+		`21where ?name`:          []interface{}{`21where name like '%:%'`, 1},
 		//	`22where >name`:          []interface{}{`22where name > :`, 1},
 		//	`23where <name`:          []interface{}{`23where name < :`, 1},
 		`24where \<name`:       []interface{}{`24where <name`, 0},
