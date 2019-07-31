@@ -43,3 +43,7 @@ func TestDecode4(t *testing.T) {
 	ut.Expect(t, DecodeInt("1", 1, 0, 1), 0)
 	ut.Expect(t, DecodeInt(float64(1), 1, 0, 1), 0)
 }
+
+func TestGetUint32(t *testing.T) {
+	 t.Log(GetUint32(1222))
+}

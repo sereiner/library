@@ -62,6 +62,81 @@ func GetInt(v interface{}, def ...int) int {
 	return 0
 }
 
+// GetInt32 获取int32数据，不是有效的数字则返回默然值或0
+func GetInt32(v interface{}, def ...int32) int32 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
+	value := fmt.Sprintf("%v", v)
+	if strings.Contains(strings.ToUpper(value), "E+") {
+		var n float64
+		_, err := fmt.Sscanf(value, "%e", &n)
+		if err == nil {
+			return int32(n)
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseInt(value[:i], 10, 32); err == nil {
+			return int32(value)
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
+	if value, err := strconv.ParseInt(value, 10, 32); err == nil {
+		return int32(value)
+	}
+	if len(def) > 0 {
+		return def[0]
+	}
+	return 0
+}
+
+func GetUint32(v interface{}, def ...uint32) uint32 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
+	value := fmt.Sprintf("%v", v)
+	if strings.Contains(strings.ToUpper(value), "E+") {
+		var n float64
+		_, err := fmt.Sscanf(value, "%e", &n)
+		if err == nil {
+			return uint32(n)
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseUint(value[:i], 10, 32); err == nil {
+			return uint32(value)
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
+	if value, err := strconv.ParseUint(value, 10, 32); err == nil {
+		return uint32(value)
+	}
+	if len(def) > 0 {
+		return def[0]
+	}
+	return 0
+}
+
 //GetInt64 获取int64数据，不是有效的数字则返回默然值或0
 func GetInt64(v interface{}, def ...int64) int64 {
 	value := fmt.Sprintf("%v", v)
@@ -76,6 +151,43 @@ func GetInt64(v interface{}, def ...int64) int64 {
 		}
 	}
 	if value, err := strconv.ParseInt(value, 10, 64); err == nil {
+		return value
+	}
+	if len(def) > 0 {
+		return def[0]
+	}
+	return 0
+}
+
+func GetUint64(v interface{}, def ...uint64) uint64 {
+
+	if vb, ok := v.([]byte); ok {
+		v = string(vb)
+	}
+
+	value := fmt.Sprintf("%v", v)
+	if strings.Contains(strings.ToUpper(value), "E+") {
+		var n float64
+		_, err := fmt.Sscanf(value, "%e", &n)
+		if err == nil {
+			return uint64(n)
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
+	if strings.Contains(value, ".") {
+		i := strings.Index(value, ".")
+		if value, err := strconv.ParseUint(value[:i], 10, 64); err == nil {
+			return value
+		}
+		if len(def) > 0 {
+			return def[0]
+		}
+	}
+
+	if value, err := strconv.ParseUint(value, 10, 64); err == nil {
 		return value
 	}
 	if len(def) > 0 {
