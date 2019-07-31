@@ -11,20 +11,25 @@ import (
 	"golang.org/x/text/transform"
 )
 
+const (
+	GBK    = "gbk"
+	GB2312 = "gb2312"
+)
+
 //Encode 将UTF8字符串编码为gbk或gb2312格式
-func Encode(content string, e string) (result []byte, err error) {
+func Encode(content string, e string) (result []byte) {
 	return EncodeBytes([]byte(content), e)
 }
 
 //EncodeBytes 将UTF8字符串编码为gbk或gb2312格式
-func EncodeBytes(buff []byte, e string) (result []byte, err error) {
+func EncodeBytes(buff []byte, e string) (result []byte) {
 	reader := GetEncodeReader(buff, e)
 	d, err := ioutil.ReadAll(reader)
 	if err != nil {
 		err = fmt.Errorf("编码转换失败:content:%s, err:%+v", string(buff), err)
-		return
+		return nil
 	}
-	return d, nil
+	return d
 }
 
 //Decode 根据编码进行解码操作
