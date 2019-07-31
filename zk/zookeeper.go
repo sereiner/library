@@ -9,7 +9,7 @@ import (
 	"sync"
 
 	"github.com/samuel/go-zookeeper/zk"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 // TIMEOUT 连接zk服务器操作的超时时间

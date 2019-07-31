@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/sereiner/library/influxdb"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/zkfy/cron"
 	"github.com/zkfy/go-metrics"
 )

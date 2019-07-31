@@ -1,6 +1,6 @@
 package zk
 
-import logger "github.com/sereiner/log"
+import logger "github.com/sereiner/library/log"
 
 type zkLogger struct {
 	logger *logger.Logger

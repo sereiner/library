@@ -1,6 +1,6 @@
 package mq
 
-import logger "github.com/sereiner/log"
+import logger "github.com/sereiner/library/log"
 
 type OptionConf struct {
 	Logger     logger.ILogger

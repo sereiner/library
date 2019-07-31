@@ -1,6 +1,8 @@
 package nsq
 
-import "github.com/go-redis/redis"
+import (
+	"github.com/nsqio/go-nsq"
+)
 
 //NsqMessage reids消息
 type NsqMessage struct {
@@ -29,12 +31,8 @@ func (m *NsqMessage) Has() bool {
 }
 
 //NewNsqMessage 创建消息
-func NewNsqMessage(cmd *redis.StringSliceCmd) *NsqMessage {
-	msg, err := cmd.Result()
-	hasData := err == nil && len(msg) > 0
-	ndata := ""
-	if hasData {
-		ndata = msg[len(msg)-1]
-	}
+func NewNsqMessage(msg *nsq.Message) *NsqMessage {
+	ndata := string(msg.Body)
+	hasData := msg.HasResponded()
 	return &NsqMessage{Message: ndata, HasData: hasData}
 }

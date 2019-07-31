@@ -6,7 +6,7 @@ import (
 
 	"github.com/nsqio/go-nsq"
 	"github.com/sereiner/library/mq"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 //NsqProducer Producer
@@ -35,7 +35,11 @@ func NewRedisProducer(address string, opts ...mq.Option) (producer *NsqProducer,
 //Connect  循环连接服务器
 func (producer *NsqProducer) Connect() (err error) {
 	producer.client, err = nsq.NewProducer(producer.address, nsq.NewConfig())
-	return
+	if err != nil {
+		return err
+	}
+
+	return producer.client.Ping()
 }
 
 //GetBackupMessage 获取备份数据

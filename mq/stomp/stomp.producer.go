@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/sereiner/library/concurrent/cmap"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/mq"
 	"github.com/zkfy/stompngo"
 )
