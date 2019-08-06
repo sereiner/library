@@ -78,10 +78,8 @@ func (client *ZookeeperClient) create(path string, data string, flags int32, acl
 		err = ErrColientCouldNotConnect
 		return
 	}
-	buff, err := encoding.Encode(data, "gbk")
-	if err != nil {
-		return "", err
-	}
+	buff := encoding.Encode(data, "gbk")
+
 	// 开启一个协程，创建节点
 	ch := make(chan interface{}, 1)
 	go func(ch chan interface{}) {
