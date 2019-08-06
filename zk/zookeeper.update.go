@@ -25,13 +25,12 @@ func (client *ZookeeperClient) Update(path string, data string, version int32) (
 	// 启动一个协程，更新节点
 	ch := make(chan error, 1)
 	go func(ch chan error) {
+
 		buff := encoding.Encode(data, "gbk")
-		if err != nil {
-			ch <- err
-			return
-		}
 		_, err = client.conn.Set(path, buff, version)
+
 		ch <- err
+
 	}(ch)
 
 	// 启动一个计时器，判断更新节点是否超时
