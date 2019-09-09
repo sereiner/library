@@ -2,6 +2,7 @@ package jsons
 
 import (
 	"encoding/json"
+	"reflect"
 	"strings"
 )
 
@@ -22,6 +23,27 @@ func Unmarshal(buf []byte) (c map[string]interface{}, err error) {
 }
 
 //Marshal 序列化JSON
-func Marshal(data interface{}) (b []byte, err error) {
-	return json.Marshal(data)
+func Marshal(v interface{}, tag ...string) (b []byte, err error) {
+
+	tagName := "json"
+	if len(tag) != 0 {
+		tagName = tag[0]
+	}
+
+	switch tagName {
+	case "json":
+		return json.Marshal(v)
+	default:
+		t := reflect.TypeOf(v)
+		val := reflect.ValueOf(v)
+		mp := map[string]interface{}{}
+		for i := 0; i < t.NumField(); i++ {
+			sf := t.Field(i)
+			v, ok := sf.Tag.Lookup(tagName)
+			if ok {
+				mp[v] = val.Field(i).Interface()
+			}
+		}
+		return json.Marshal(mp)
+	}
 }
