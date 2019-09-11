@@ -2,11 +2,11 @@ package etcd_lib
 
 import (
 	"errors"
+	"github.com/coreos/etcd/clientv3"
 	"github.com/samuel/go-zookeeper/zk"
+	logger "github.com/sereiner/library/log"
 	"sync"
 	"time"
-	"github.com/coreos/etcd/clientv3"
-	logger "github.com/sereiner/library/log"
 )
 
 // TIMEOUT 连接zk服务器操作的超时时间

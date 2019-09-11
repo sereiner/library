@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/nsqio/go-nsq"
-	"github.com/sereiner/library/mq"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/library/mq"
 )
 
 //NsqProducer Producer

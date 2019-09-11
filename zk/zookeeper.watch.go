@@ -58,8 +58,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/sereiner/library/registry"
 	"github.com/samuel/go-zookeeper/zk"
+	"github.com/sereiner/library/registry"
 )
 
 //eventWatch 服务器事件监控[重点测试]

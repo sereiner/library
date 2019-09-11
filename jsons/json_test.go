@@ -30,14 +30,13 @@ func TestMarshal(t *testing.T) {
 		Country: "中国",
 	}
 
-
 	gotA, err := Marshal(u)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(string(gotA))
 
-	gotB, err := Marshal(u,"ms")
+	gotB, err := Marshal(u, "ms")
 	if err != nil {
 		t.Error(err)
 	}

@@ -45,5 +45,5 @@ func TestDecode4(t *testing.T) {
 }
 
 func TestGetUint32(t *testing.T) {
-	 t.Log(GetUint32(1222))
+	t.Log(GetUint32(1222))
 }

@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/library/encoding"
 	"github.com/samuel/go-zookeeper/zk"
+	"github.com/sereiner/library/encoding"
 )
 
 //CreatePersistentNode 创建持久化的节点

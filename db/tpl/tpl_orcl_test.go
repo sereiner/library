@@ -12,7 +12,7 @@ func TestORCTPLgetSPName(t *testing.T) {
 		",order_create(:1,:2,:3)":  "begin order_create(:1,:2,:3);end;",
 		";order_create(:1,:2,:3),": "begin order_create(:1,:2,:3);end;",
 		"#order_create(:1,:2,:3)":  "begin #order_create(:1,:2,:3);end;",
-		"": "begin ;end;",
+		"":                         "begin ;end;",
 	}
 	for i, except := range input {
 		if orcl.getSPName(i) != except {
