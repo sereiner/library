@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/influxdb/models"
+	"github.com/sereiner/library/influxdb/models"
 )
 
 // HTTPConfig is the config data needed to create an HTTP Client.
