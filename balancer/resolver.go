@@ -22,10 +22,10 @@ type Resolver struct {
 // NewResolver return resolver builder
 // target example: "http://127.0.0.1:2379,http://127.0.0.1:12379,http://127.0.0.1:22379"
 // service is service name
-func NewResolver(target string, service string) resolver.Builder {
+func NewResolver(target string, platName, service string) resolver.Builder {
 	return &Resolver{
 		target:  target,
-		schema:  service,
+		schema:  platName,
 		service: service,
 		logger:  logger.GetSession("grpc", logger.CreateSession()),
 	}
