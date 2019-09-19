@@ -17,3 +17,7 @@ func TestRegister(t *testing.T) {
 	time.Sleep(60*time.Second)
 
 }
+
+func TestUnRegister(t *testing.T) {
+	UnRegister()
+}
