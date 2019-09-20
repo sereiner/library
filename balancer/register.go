@@ -3,6 +3,7 @@ package balancer
 import (
 	"context"
 	"fmt"
+	"github.com/sereiner/library/envs"
 	"net"
 	"strings"
 	"time"
@@ -17,11 +18,18 @@ var Deregister = make(chan struct{})
 func Register(target, platName, svrName, host, port string, interval time.Duration, ttl int) error {
 	serviceValue := net.JoinHostPort(host, port)
 	serviceKey := fmt.Sprintf("/%s/%s/%s", platName, svrName, serviceValue)
+	var targetArr []string
+	if len(target) == 0 {
+		endpoints := envs.GetString("ENDPOINTS", "127.0.0.1:2379")
+		targetArr = strings.Split(endpoints, ",")
+	} else {
+		targetArr = strings.Split(target, ",")
+	}
 
 	// get endpoints for register dial address
 	var err error
 	cli, err := clientv3.New(clientv3.Config{
-		Endpoints: strings.Split(target, ","),
+		Endpoints: targetArr,
 	})
 	if err != nil {
 		return fmt.Errorf("grpc: create clientv3 client failed: %v", err)

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/mvcc/mvccpb"
+	"github.com/sereiner/library/envs"
 	logger "github.com/sereiner/library/log"
 	"google.golang.org/grpc/resolver"
 	"strings"
@@ -48,8 +49,17 @@ func (r *Resolver) Close() {
 func (r *Resolver) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOption) (resolver.Resolver, error) {
 	var err error
 
+	var targetArr []string
+
+	if len(r.target) == 0 {
+		endpoints := envs.GetString("ENDPOINTS", "127.0.0.1:2379")
+		targetArr = strings.Split(endpoints, ",")
+	} else {
+		targetArr = strings.Split(r.target, ",")
+	}
+
 	r.cli, err = clientv3.New(clientv3.Config{
-		Endpoints: strings.Split(r.target, ","),
+		Endpoints: targetArr,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("grpc: create clientv3 client failed: %v", err)
