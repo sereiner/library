@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"strings"
+	"time"
 
 	"github.com/nsqio/go-nsq"
 
@@ -26,7 +27,7 @@ type nsqConsumer struct {
 }
 
 func (n *nsqConsumer) HandleMessage(message *nsq.Message) error {
-
+	time.Sleep(time.Nanosecond * 100)
 	n.msgQueue <- message
 	return nil
 }
