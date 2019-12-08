@@ -19,8 +19,7 @@ type NsqProducer struct {
 	*mq.OptionConf
 }
 
-//NewRedisProducer 创建新的producer
-func NewRedisProducer(address string, opts ...mq.Option) (producer *NsqProducer, err error) {
+func NewNsqProducer(address string, opts ...mq.Option) (producer *NsqProducer, err error) {
 	producer = &NsqProducer{address: address}
 	producer.OptionConf = &mq.OptionConf{
 		Logger: logger.GetSession("mq.nsq", logger.CreateSession()),
@@ -68,7 +67,7 @@ type nsqProducerResolver struct {
 }
 
 func (s *nsqProducerResolver) Resolve(address string, opts ...mq.Option) (mq.MQProducer, error) {
-	return NewRedisProducer(address, opts...)
+	return NewNsqProducer(address, opts...)
 }
 
 func init() {
