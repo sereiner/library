@@ -1,6 +1,5 @@
 package kafka
 
-/*
 import (
 	"fmt"
 	"os"
@@ -19,6 +18,7 @@ type KafkaConsumer struct {
 	quitChan  chan struct{}
 	*mq.OptionConf
 }
+
 type kafkaConsumer struct {
 	consumer sarama.Consumer
 	msgQueue chan *sarama.ConsumerMessage
@@ -41,7 +41,7 @@ func (k *KafkaConsumer) Connect() error {
 }
 
 //Consume 订阅消息
-func (k *KafkaConsumer) Consume(queue string, call func(mq.IMessage)) (err error) {
+func (k *KafkaConsumer) Consume(queue string, concurrency int, call func(mq.IMessage)) (err error) {
 	fmt.Println("启动接受消息")
 	_, cnsmr, _ := k.consumers.SetIfAbsentCb(queue, func(i ...interface{}) (interface{}, error) {
 		c := &kafkaConsumer{}
@@ -136,4 +136,3 @@ func (s *kafkaConsumerResolver) Resolve(address string, opts ...mq.Option) (mq.M
 func init() {
 	mq.RegisterCosnumer("kafka", &kafkaConsumerResolver{})
 }
-*/
