@@ -27,6 +27,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.9.6 // indirect
 	github.com/jonboulle/clockwork v0.1.0 // indirect
+	github.com/klauspost/cpuid v1.2.2 // indirect
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/nsqio/go-nsq v1.0.7
