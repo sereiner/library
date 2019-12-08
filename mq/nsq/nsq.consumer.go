@@ -22,6 +22,7 @@ type NsqConsumer struct {
 type nsqConsumer struct {
 	consumer *nsq.Consumer
 	msgQueue chan *nsq.Message
+	closeCh  chan struct{}
 }
 
 func (n *nsqConsumer) HandleMessage(message *nsq.Message) error {
@@ -102,6 +103,8 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 	LOOP:
 		for {
 			select {
+			case <-consumer.closeCh:
+				break LOOP
 			case msg, ok := <-chanmsg:
 				if ok {
 					go call(NewNsqMessage(msg))
@@ -110,12 +113,11 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 				}
 			}
 		}
+		close(chanmsg)
 	}()
 
-	//close(chanmsg)
-
 	//if err := consumer.consumer.Close(); err != nil {
-	//fmt.Println("Failed to close consumer: ", err)
+	//	fmt.Println("Failed to close consumer: ", err)
 	//}
 	return nil
 }
@@ -132,8 +134,10 @@ func (n *NsqConsumer) UnConsume(queue string) {
 func (n *NsqConsumer) Close() {
 	close(n.quitChan)
 	n.consumers.IterCb(func(key string, value interface{}) bool {
-		consumer := value.(*nsqConsumer)
-		close(consumer.msgQueue)
+		c := value.(*nsqConsumer)
+		c.consumer.Stop()
+		c.closeCh <- struct{}{}
+		close(c.msgQueue)
 		return true
 	})
 }
