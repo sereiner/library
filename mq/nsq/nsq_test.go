@@ -14,7 +14,11 @@ func Test_NewNsqProducer(t *testing.T) {
 		t.Fatal(err)
 	}
 	p.Connect()
-	p.Send("hello", `{"name":"jack","age":22}`, time.Second)
+	for {
+		time.Sleep(time.Microsecond * 500)
+		p.Send("hello", `{"name":"jack","age":22}`, time.Second)
+	}
+
 }
 
 func Test_NewNsqConsumer(t *testing.T) {
@@ -22,12 +26,12 @@ func Test_NewNsqConsumer(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = c.Consume("test#ch", 1, M)
+	err = c.Consume("hello#ch", 1, M)
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	select {}
+	time.Sleep(time.Second * 1)
+	c.Close()
 }
 
 func M(message mq.IMessage) {

@@ -65,6 +65,7 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 		config := nsq.NewConfig()
 		c.consumer, err = nsq.NewConsumer(queueArr[0], queueArr[1], config)
 		c.msgQueue = make(chan *nsq.Message, 10000)
+		c.closeCh = make(chan struct{}, 1)
 		c.consumer.AddHandler(c)
 		err := c.consumer.ConnectToNSQD(n.address)
 		if err != nil {
@@ -92,6 +93,8 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 	go func(consumer *nsqConsumer) {
 		for {
 			select {
+			case <-consumer.closeCh:
+				break
 			case message, ok := <-consumer.Messages():
 				if ok {
 					chanmsg <- message
@@ -137,6 +140,7 @@ func (n *NsqConsumer) Close() {
 	n.consumers.IterCb(func(key string, value interface{}) bool {
 		c := value.(*nsqConsumer)
 		c.consumer.Stop()
+		time.Sleep(time.Second)
 		c.closeCh <- struct{}{}
 		close(c.msgQueue)
 		return true
