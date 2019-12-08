@@ -52,7 +52,6 @@ func (n *NsqConsumer) Connect() error {
 
 //Consume 订阅消息
 func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessage)) (err error) {
-	fmt.Println("启动接受消息")
 	_, cname, _ := n.consumers.SetIfAbsentCb(queue, func(i ...interface{}) (interface{}, error) {
 
 		c := &nsqConsumer{}
@@ -65,8 +64,9 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 		c.consumer, err = nsq.NewConsumer(queueArr[0], queueArr[1], config)
 		c.msgQueue = make(chan *nsq.Message, 10000)
 		c.consumer.AddHandler(c)
-		err := c.consumer.ConnectToNSQD(n.address)
+		err := c.consumer.ConnectToNSQD(n.Address)
 		if err != nil {
+			fmt.Println(err)
 			return nil, err
 		}
 		return c, nil

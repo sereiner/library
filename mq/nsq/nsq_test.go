@@ -22,7 +22,11 @@ func Test_NewNsqConsumer(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	c.Consume("hello#mama", 1, M)
+	err = c.Consume("test#ch", 1, M)
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	select {}
 }
 
