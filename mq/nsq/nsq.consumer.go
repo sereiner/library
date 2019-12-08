@@ -123,12 +123,20 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 
 //UnConsume 取消注册消费
 func (n *NsqConsumer) UnConsume(queue string) {
-
+	if c, ok := n.consumers.Get(queue); ok {
+		consumer := c.(*nsqConsumer)
+		close(consumer.msgQueue)
+	}
 }
 
 //Close 关闭当前连接
 func (n *NsqConsumer) Close() {
-
+	close(n.quitChan)
+	n.consumers.IterCb(func(key string, value interface{}) bool {
+		consumer := value.(*nsqConsumer)
+		close(consumer.msgQueue)
+		return true
+	})
 }
 
 type nsqConsumerResolver struct {
