@@ -64,7 +64,7 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 		c.consumer, err = nsq.NewConsumer(queueArr[0], queueArr[1], config)
 		c.msgQueue = make(chan *nsq.Message, 10000)
 		c.consumer.AddHandler(c)
-		err := c.consumer.ConnectToNSQD(n.Address)
+		err := c.consumer.ConnectToNSQD(n.address)
 		if err != nil {
 			fmt.Println(err)
 			return nil, err
@@ -99,7 +99,6 @@ func (n *NsqConsumer) Consume(queue string, concurrency int, call func(mq.IMessa
 	}(consumer)
 
 	go func() {
-		fmt.Println("接受消息，使用对应函数")
 	LOOP:
 		for {
 			select {
