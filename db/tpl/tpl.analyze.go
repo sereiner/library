@@ -41,12 +41,15 @@ func AnalyzeTPLFromCache(name string, tpl string, input map[string]interface{}, 
 	return value.sql, params*/
 }
 
-//AnalyzeTPL 解析模板内容，并返回解析后的SQL语句，入输入参数
-//@表达式，替换为参数化字符如: :1,:2,:3
-//#表达式，替换为指定值，值为空时返回NULL
-//~表达式，检查值，值为空时返加"",否则返回: , name=value
-//&条件表达式，检查值，值为空时返加"",否则返回: and name=value
-//|条件表达式，检查值，值为空时返回"", 否则返回: or name=value
+// AnalyzeTPL 解析模板内容，并返回解析后的SQL语句，入输入参数
+// @ 表达式，替换为参数化字符如: :1,:2,:3
+// # 表达式，替换为指定值，值为空时返回NULL
+// $ 表达式，替换为指定值，值为空时返回""
+// [ 大于等于表达式,值为空时返回"",否则返回: and name >= value
+// ] 小于等于表达式,值为空时返回"",否则返回: and name <= value
+// ~ 表达式，检查值，值为空时返回"",否则返回: , name=value
+// & 条件表达式，检查值，值为空时返回"",否则返回: and name=value
+// | 条件表达式，检查值，值为空时返回"", 否则返回: or name=value
 func AnalyzeTPL(tpl string, input map[string]interface{}, prefix func() string) (sql string, params []interface{}, names []string) {
 	params = make([]interface{}, 0)
 	names = make([]string, 0)
