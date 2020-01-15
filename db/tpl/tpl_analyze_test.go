@@ -1,6 +1,8 @@
 package tpl
 
-import "testing"
+import (
+	"testing"
+)
 
 //go test -coverprofile=cover.out github.com/zzkkff/library/db/tpl
 // cover -func=cover.out
@@ -51,6 +53,8 @@ func TestAnalyzeTPL(t *testing.T) {
 		//	`31where >t.name`:        []interface{}{`31where and t.name > :`, 1},
 		`32where ~t.name`: []interface{}{`32where ,t.name=:`, 1},
 		`33where &p.name`: []interface{}{`33where p.name=:`, 1},
+		`34where [p.name`: []interface{}{`34where p.name>=:`, 1},
+		`35where ]p.name`: []interface{}{`35where p.name<=:`, 1},
 		/*end*/
 	}
 
@@ -87,10 +91,11 @@ func TestAnalyzeTPL(t *testing.T) {
 
 	/*add by champly 2016年11月9日11:54:52*/
 	// 多个不同的参数
-	tpl = "select seq_wxaccountmenu_auto_id.nextbal from where name=@name and name2='#name2' &name3_ |name ~name"
-	except = "select seq_wxaccountmenu_auto_id.nextbal from where name=: and name2='colin2' and name3_=: or name=: ,name=:"
+	tpl = "select seq_wxaccountmenu_auto_id.nextbal from where name=@name and name2='#name2' &name3_ |name ~name [name ]name"
+	except = "select seq_wxaccountmenu_auto_id.nextbal from where name=: and name2='colin2' and name3_=: or name=: ,name=: and name>=: and name<=:"
 	actual, params, _ = AnalyzeTPL(tpl, input, f)
-	if actual != except || len(params) != 4 || params[0].(string) != input["name"] || params[1].(string) != input["name3_"] || params[2].(string) != input["name"] || params[3].(string) != input["name"] {
+
+	if actual != except || len(params) != 6 || params[0].(string) != input["name"] || params[1].(string) != input["name3_"] || params[2].(string) != input["name"] || params[3].(string) != input["name"] {
 		t.Error("AnalyzeTPL解析参数有误")
 	}
 	/*end*/
