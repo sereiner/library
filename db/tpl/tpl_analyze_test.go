@@ -1,6 +1,7 @@
 package tpl
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -100,4 +101,21 @@ func TestAnalyzeTPL(t *testing.T) {
 	}
 	/*end*/
 
+}
+
+func TestAnalyzeTPL2(t *testing.T) {
+	input := make(map[string]interface{})
+	input["name"] = "colin"
+	input["id1"] = 0
+	input["id2"] = 10
+	input["name2"] = "colin2"
+	input["name3_"] = "name3_"
+	f := func() string {
+		return "?"
+	}
+
+	tpl := `update gms set name = @gms.name where [gms.id1 ]gms.id2`
+
+	actual, params, _ := AnalyzeTPL(tpl, input, f)
+	fmt.Println(actual, params)
 }
