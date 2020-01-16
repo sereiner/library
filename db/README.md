@@ -83,7 +83,7 @@
 检查值，值为空时返回"",否则返回: , name=value
 > 当我们要更新 `杜子腾` 的专业时,而性别又是一个可选更新项目
 
-    db.Query(`update students set major = @major ~gender where name = @name`,map[string]interface{}{
+    db.Execute(`update students set major = @major ~gender where name = @name`,map[string]interface{}{
        "gender":"女",
        "major":"网络工程",
        "name":"杜子腾",
