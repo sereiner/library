@@ -104,17 +104,15 @@ func TestAnalyzeTPL(t *testing.T) {
 }
 
 func TestAnalyzeTPL2(t *testing.T) {
-	input := make(map[string]interface{})
-	input["name"] = "colin"
-	input["id1"] = 0
-	input["id2"] = 10
-	input["name2"] = "colin2"
-	input["name3_"] = "name3_"
+	input := map[string]interface{}{
+		"gender": "女",
+		"name":   "",
+	}
 	f := func() string {
 		return "?"
 	}
 
-	tpl := `update gms set name = @gms.name where [gms.id1 ]gms.id2`
+	tpl := `select * from students where gender = @gender ?name`
 
 	actual, params, _ := AnalyzeTPL(tpl, input, f)
 	fmt.Println(actual, params)
