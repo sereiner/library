@@ -55,4 +55,5 @@ require (
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	google.golang.org/grpc v1.23.0
 	sigs.k8s.io/yaml v1.1.0 // indirect
+	xorm.io/xorm v1.0.1
 )

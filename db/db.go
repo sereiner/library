@@ -1,9 +1,10 @@
 package db
 
 import (
-	"time"
-
 	"github.com/sereiner/library/db/tpl"
+	"time"
+	"xorm.io/xorm"
+	"xorm.io/xorm/log"
 )
 
 //IDB 数据库操作接口,安装可需能需要执行export LD_LIBRARY_PATH=/usr/local/lib
@@ -29,13 +30,27 @@ type IDBTrans interface {
 
 //DB 数据库操作类
 type DB struct {
-	db  ISysDB
+	db ISysDB
+	*xorm.Engine
 	tpl tpl.ITPLContext
 }
 
 //NewDB 创建DB实例
 func NewDB(provider string, connString string, maxOpen int, maxIdle int, maxLifeTime int) (obj *DB, err error) {
-	obj = &DB{}
+
+	engine, err := xorm.NewEngine(provider, connString)
+	if err != nil {
+		return
+	}
+
+	engine.SetLogLevel(log.LOG_WARNING)
+	engine.ShowSQL(false)
+	engine.SetMaxIdleConns(maxIdle)
+	engine.SetMaxOpenConns(maxOpen)
+
+	obj = &DB{
+		Engine: engine,
+	}
 	obj.tpl, err = tpl.GetDBContext(provider)
 	if err != nil {
 		return
